@@ -1,0 +1,320 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 21-11-2023 a las 03:36:55
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `pydt`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cargos`
+--
+
+CREATE TABLE `cargos` (
+  `cargo_id` int(11) NOT NULL,
+  `cargo_nombre` varchar(255) NOT NULL,
+  `cargo_sueldo_minimo` decimal(10,2) NOT NULL,
+  `cargo_sueldo_maximo` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `cargos`
+--
+
+INSERT INTO `cargos` (`cargo_id`, `cargo_nombre`, `cargo_sueldo_minimo`, `cargo_sueldo_maximo`) VALUES
+(1, 'Cargo 1', 50000.00, 70000.00),
+(2, 'Cargo 2', 60000.00, 80000.00),
+(3, 'Cargo 3', 70000.00, 90000.00),
+(4, 'Cargo 4', 80000.00, 100000.00),
+(5, 'Cargo 5', 90000.00, 110000.00);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ciudades`
+--
+
+CREATE TABLE `ciudades` (
+  `ciud_id` int(11) NOT NULL,
+  `ciud_nombre` varchar(255) NOT NULL,
+  `pais_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `ciudades`
+--
+
+INSERT INTO `ciudades` (`ciud_id`, `ciud_nombre`, `pais_id`) VALUES
+(1, 'Ciudad 1', 1),
+(2, 'Ciudad 2', 2),
+(3, 'Ciudad 3', 3),
+(4, 'Ciudad 4', 4),
+(5, 'Ciudad 5', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `departamentos`
+--
+
+CREATE TABLE `departamentos` (
+  `dpto_id` int(11) NOT NULL,
+  `dpto_nombre` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `departamentos`
+--
+
+INSERT INTO `departamentos` (`dpto_id`, `dpto_nombre`) VALUES
+(1, 'Departamento 1'),
+(2, 'Departamento 2'),
+(3, 'Departamento 3'),
+(4, 'Departamento 4'),
+(5, 'Departamento 5');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `empleados`
+--
+
+CREATE TABLE `empleados` (
+  `empl_id` int(11) NOT NULL,
+  `empl_primer_nombre` varchar(255) NOT NULL,
+  `empl_segundo_nombre` varchar(255) DEFAULT NULL,
+  `empl_email` varchar(255) NOT NULL,
+  `empl_fecha_nac` date NOT NULL,
+  `empl_cargo_id` int(11) NOT NULL,
+  `empl_dpto_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `empleados`
+--
+
+INSERT INTO `empleados` (`empl_id`, `empl_primer_nombre`, `empl_segundo_nombre`, `empl_email`, `empl_fecha_nac`, `empl_cargo_id`, `empl_dpto_id`) VALUES
+(1, 'Empleado 1', 'Apellido 1', 'empleado1@example.com', '1990-01-01', 1, 1),
+(2, 'Empleado 2', 'Apellido 2', 'empleado2@example.com', '1991-02-02', 2, 2),
+(3, 'Empleado 3', 'Apellido 3', 'empleado3@example.com', '1992-03-03', 3, 3),
+(4, 'Empleado 4', 'Apellido 4', 'empleado4@example.com', '1993-04-04', 4, 4),
+(5, 'Empleado 5', 'Apellido 5', 'empleado5@example.com', '1994-05-05', 5, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `historico`
+--
+
+CREATE TABLE `historico` (
+  `emphist_id` int(11) NOT NULL,
+  `emphist_fecha_retiro` date NOT NULL,
+  `emphist_cargo_id` int(11) NOT NULL,
+  `emphist_dpto_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `historico`
+--
+
+INSERT INTO `historico` (`emphist_id`, `emphist_fecha_retiro`, `emphist_cargo_id`, `emphist_dpto_id`) VALUES
+(1, '2020-01-01', 1, 1),
+(2, '2021-02-02', 2, 2),
+(3, '2022-03-03', 3, 3),
+(4, '2023-04-04', 4, 4),
+(5, '2024-05-05', 5, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `localizaciones`
+--
+
+CREATE TABLE `localizaciones` (
+  `localiz_id` int(11) NOT NULL,
+  `localiz_ciudad_id` int(11) NOT NULL,
+  `localiz_direccion` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `localizaciones`
+--
+
+INSERT INTO `localizaciones` (`localiz_id`, `localiz_ciudad_id`, `localiz_direccion`) VALUES
+(1, 1, 'Dirección 1'),
+(2, 2, 'Dirección 2'),
+(3, 3, 'Dirección 3'),
+(4, 4, 'Dirección 4'),
+(5, 5, 'Dirección 5');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `paises`
+--
+
+CREATE TABLE `paises` (
+  `pais_id` int(11) NOT NULL,
+  `pais_nombre` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `paises`
+--
+
+INSERT INTO `paises` (`pais_id`, `pais_nombre`) VALUES
+(1, 'País 1'),
+(2, 'País 2'),
+(3, 'País 3'),
+(4, 'País 4'),
+(5, 'País 5');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `cargos`
+--
+ALTER TABLE `cargos`
+  ADD PRIMARY KEY (`cargo_id`);
+
+--
+-- Indices de la tabla `ciudades`
+--
+ALTER TABLE `ciudades`
+  ADD PRIMARY KEY (`ciud_id`),
+  ADD KEY `pais_id` (`pais_id`);
+
+--
+-- Indices de la tabla `departamentos`
+--
+ALTER TABLE `departamentos`
+  ADD PRIMARY KEY (`dpto_id`);
+
+--
+-- Indices de la tabla `empleados`
+--
+ALTER TABLE `empleados`
+  ADD PRIMARY KEY (`empl_id`),
+  ADD KEY `empl_cargo_id` (`empl_cargo_id`),
+  ADD KEY `empl_dpto_id` (`empl_dpto_id`);
+
+--
+-- Indices de la tabla `historico`
+--
+ALTER TABLE `historico`
+  ADD PRIMARY KEY (`emphist_id`),
+  ADD KEY `emphist_cargo_id` (`emphist_cargo_id`),
+  ADD KEY `emphist_dpto_id` (`emphist_dpto_id`);
+
+--
+-- Indices de la tabla `localizaciones`
+--
+ALTER TABLE `localizaciones`
+  ADD PRIMARY KEY (`localiz_id`),
+  ADD KEY `localiz_ciudad_id` (`localiz_ciudad_id`);
+
+--
+-- Indices de la tabla `paises`
+--
+ALTER TABLE `paises`
+  ADD PRIMARY KEY (`pais_id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `cargos`
+--
+ALTER TABLE `cargos`
+  MODIFY `cargo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `ciudades`
+--
+ALTER TABLE `ciudades`
+  MODIFY `ciud_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `departamentos`
+--
+ALTER TABLE `departamentos`
+  MODIFY `dpto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `empleados`
+--
+ALTER TABLE `empleados`
+  MODIFY `empl_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `historico`
+--
+ALTER TABLE `historico`
+  MODIFY `emphist_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `localizaciones`
+--
+ALTER TABLE `localizaciones`
+  MODIFY `localiz_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `paises`
+--
+ALTER TABLE `paises`
+  MODIFY `pais_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `ciudades`
+--
+ALTER TABLE `ciudades`
+  ADD CONSTRAINT `ciudades_ibfk_1` FOREIGN KEY (`pais_id`) REFERENCES `paises` (`pais_id`);
+
+--
+-- Filtros para la tabla `empleados`
+--
+ALTER TABLE `empleados`
+  ADD CONSTRAINT `empleados_ibfk_1` FOREIGN KEY (`empl_cargo_id`) REFERENCES `cargos` (`cargo_id`),
+  ADD CONSTRAINT `empleados_ibfk_2` FOREIGN KEY (`empl_dpto_id`) REFERENCES `departamentos` (`dpto_id`);
+
+--
+-- Filtros para la tabla `historico`
+--
+ALTER TABLE `historico`
+  ADD CONSTRAINT `historico_ibfk_1` FOREIGN KEY (`emphist_cargo_id`) REFERENCES `cargos` (`cargo_id`),
+  ADD CONSTRAINT `historico_ibfk_2` FOREIGN KEY (`emphist_dpto_id`) REFERENCES `departamentos` (`dpto_id`);
+
+--
+-- Filtros para la tabla `localizaciones`
+--
+ALTER TABLE `localizaciones`
+  ADD CONSTRAINT `localizaciones_ibfk_1` FOREIGN KEY (`localiz_ciudad_id`) REFERENCES `ciudades` (`ciud_id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
